@@ -1,0 +1,2 @@
+recursive-include tutorcoursegraph/patches *
+recursive-include tutorcoursegraph/templates *
