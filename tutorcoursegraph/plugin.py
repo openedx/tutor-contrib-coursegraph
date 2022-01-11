@@ -2,15 +2,33 @@ from glob import glob
 import os
 import pkg_resources
 
+import click
+
 from .__about__ import __version__
 
 templates = pkg_resources.resource_filename(
     "tutorcoursegraph", "templates"
 )
 
-config = {}
+config = {
+    "add": {
+        "NEO4J_USER": "{{ 8|random_string }}",
+        "NEO4J_PASSWORD": "{{ 20|random_string }}",
+    },
+    "defaults": {
+        "VERSION": __version__,
+        "HOST": "coursegraph.{{ LMS_HOST }}",
+        "DOCKER_IMAGE": "{{ DOCKER_REGISTRY }}neo4j:{{ COURSEGRAPH_NEO4J_VERSION }}",
+        "NEO4J_VERSION": "3.5.28",
+        "NEO4J_AUTH_ENABLED": True,
+    },
+}
 
-hooks = {}
+hooks = {
+    "remote-image": {"coursegraph": "{{ COURSEGRAPH_DOCKER_IMAGE }}"},
+    "init": ["cms"],
+}
+
 
 
 def patches():
@@ -24,3 +42,11 @@ def patches():
             content = patch_file.read()
             all_patches[name] = content
     return all_patches
+
+@click.group(help="CourseGraph administration")
+def command():
+    pass
+
+@command.command(help="Refresh CourseGraph from CMS")
+def refresh():
+    click.echo('this would refresh coursegraph!')

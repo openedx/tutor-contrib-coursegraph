@@ -38,8 +38,8 @@ setup(
     long_description=load_readme(),
     packages=find_packages(exclude=["tests*"]),
     include_package_data=True,
-    python_requires=">=3.6",
-    install_requires=["tutor"],
+    python_requires=">=3.8",
+    install_requires=["tutor", "click"],
     entry_points={
         "tutor.plugin.v0": [
             "coursegraph = tutorcoursegraph.plugin"
@@ -51,8 +51,6 @@ setup(
         "License :: OSI Approved :: GNU Affero General Public License v3",
         "Operating System :: OS Independent",
         "Programming Language :: Python",
-        "Programming Language :: Python :: 3.6",
-        "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
