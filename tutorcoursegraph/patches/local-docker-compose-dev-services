@@ -1,0 +1,10 @@
+coursegraph:
+  ports:
+    - "7474:7474"  # Expose Web interface at http://localhost:7474.
+    - "7687:7687"  # Expose Bolt interface at bolt://user:password@localhost:7687.
+  networks:
+    default:
+      aliases:
+        - "{{ COURSEGRAPH_HOST }}"
+  tty: true         # Allow TTY-enabled shell on service with `tutor dev exec coursegraph bash`.
+  stdin_open: true  # Allow attachment to service with `docker-compose attach`.

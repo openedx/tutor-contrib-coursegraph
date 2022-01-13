@@ -1,7 +1,11 @@
 coursegraph:
-  image: "{{ COURSEGRAPH_IMAGE_NAME }}:{{ COURSEGRAPH_VERSION }}"
-  restart: unless-stopped
+  image: "{{ COURSEGRAPH_NEO4J_DOCKER_IMAGE }}"
   environment:
-    NEO4J_AUTH: {{ 'COURSEGRAPH_NEO4J_USERNAME/COURSEGRAPH_NEO4J_PASSWORD' if COURSEGRAPH_NEO4J_AUTH_ENABLED else '!!null'}}
+  {% if COURSEGRAPH_NEO4J_INITIAL_PASSWORD %}
+    NEO4J_AUTH: 'neo4j/{{ COURSEGRAPH_NEO4J_INITIAL_PASSWORD }}'
+  {% else %}
+    NEO4J_AUTH: 'none'
+  {% endif %}
+  restart: unless-stopped
   volumes:
-    - ../../data/neo4j:/data
+    - ../../data/coursegraph:/data
