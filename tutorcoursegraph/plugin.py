@@ -1,4 +1,5 @@
 from glob import glob
+from typing import List
 import os
 import pkg_resources
 
@@ -46,6 +47,22 @@ def command():
     pass
 
 
-@command.command(help="Refresh CourseGraph from CMS")
-def refresh():
-    click.echo('this would refresh coursegraph!')
+@command.command(help="Refresh CourseGraph from CMS.")
+@click.pass_obj
+@click.option(
+    "-f",
+    "--force",
+    is_flag=True, help="Refresh courses even if they are unchanged.",
+)
+def refresh(context_obj, force: bool):
+    refresh_service = "cms"
+    if force:
+        refresh_script_path = ["coursegraph", "apps", "cms", "refresh-force"]
+    else:
+        refresh_script_path = ["coursegraph", "apps", "cms", "refresh"]
+    context_obj.job_runner().run_job_from_template(refresh_service, *refresh_script_path)
+
+
+@command.command(help="Clear data in CourseGraph.")
+def clear():
+    raise NotImplementedError('TODO: this should clear coursegraph')

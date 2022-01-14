@@ -1,0 +1,5 @@
+./manage.py cms dump_to_neo4j \
+	--host {{ COURSEGRAPH_HOST }} \
+	--user neo4j \
+	--password {{ COURSEGRAPH_NEO4J_INITIAL_PASSWORD }}  \
+	--override
