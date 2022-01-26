@@ -1,8 +1,8 @@
 coursegraph:
   image: "{{ COURSEGRAPH_NEO4J_DOCKER_IMAGE }}"
   environment:
-  {% if COURSEGRAPH_NEO4J_INITIAL_PASSWORD %}
-    NEO4J_AUTH: 'neo4j/{{ COURSEGRAPH_NEO4J_INITIAL_PASSWORD }}'
+  {% if COURSEGRAPH_NEO4J_PASSWORD %}
+    NEO4J_AUTH: 'neo4j/{{ COURSEGRAPH_NEO4J_PASSWORD }}'
   {% else %}
     NEO4J_AUTH: 'none'
   {% endif %}

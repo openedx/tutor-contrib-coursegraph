@@ -1,4 +1,0 @@
-coursegraph-job:
-  image: {{ COURSEGRAPH_NEO4J_DOCKER_IMAGE }}
-  volumes:
-    - ../../data/coursegraph:/data

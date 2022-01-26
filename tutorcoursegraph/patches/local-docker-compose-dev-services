@@ -5,6 +5,6 @@ coursegraph:
   networks:
     default:
       aliases:
-        - "{{ COURSEGRAPH_HOST }}"
+        - "{{ COURSEGRAPH_NEO4J_HOST }}"
   tty: true         # Allow TTY-enabled shell on service with `tutor dev exec coursegraph bash`.
   stdin_open: true  # Allow attachment to service with `docker-compose attach`.

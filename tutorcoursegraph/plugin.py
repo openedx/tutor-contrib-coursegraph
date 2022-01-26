@@ -13,18 +13,22 @@ templates = pkg_resources.resource_filename(
 
 config = {
     "add": {
-        "NEO4J_INITIAL_PASSWORD": "{{ 20|random_string }}",
+        "NEO4J_PASSWORD": "{{ 20|random_string }}",
     },
     "defaults": {
         "VERSION": __version__,
         "NEO4J_VERSION": "3.5.28",
         "NEO4J_DOCKER_IMAGE": "{{ DOCKER_REGISTRY }}neo4j:{{ COURSEGRAPH_NEO4J_VERSION }}",
-        "HOST": "coursegraph.{{ LMS_HOST }}",
+        "NEO4J_HOST": "coursegraph.{{ LMS_HOST }}",
+        "NEO4J_PORT": 7687,
+        "NEO4J_USER": "neo4j",
+        "NEO4J_SECURE": True,
+        "NEO4J_PROTOCOL": "bolt",
     },
 }
 
 hooks = {
-    "remote-image": {"coursegraph": "{{ COURSEGRAPH_DOCKER_IMAGE }}"},
+    "remote-image": {"coursegraph": "{{ COURSEGRAPH_NEO4J_DOCKER_IMAGE }}"},
     "init": ["cms"],
 }
 
