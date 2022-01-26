@@ -25,12 +25,12 @@ ABOUT = load_about()
 
 
 setup(
-    name="tutor-coursegraph",
+    name="tutor-contrib-coursegraph",
     version=ABOUT["__version__"],
-    url="https://github.com/kdmccormick/tutor-coursegraph",
+    url="https://github.com/kdmccormick/tutor-contrib-coursegraph",
     project_urls={
-        "Code": "https://github.com/kdmccormick/tutor-coursegraph",
-        "Issue tracker": "https://github.com/kdmccormick/tutor-coursegraph/issues",
+        "Code": "https://github.com/kdmccormick/tutor-contrib-coursegraph",
+        "Issue tracker": "https://github.com/kdmccormick/tutor-contrib-coursegraph/issues",
     },
     license="AGPLv3",
     author="Kyle McCormick",
