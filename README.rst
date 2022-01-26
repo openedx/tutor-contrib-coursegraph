@@ -6,7 +6,7 @@ Installation
 
 ::
 
-    pip install git+https://github.com/kdmccormick/tutor-coursegraph
+    pip install git+https://github.com/kdmccormick/tutor-contrib-coursegraph
 
 Usage
 -----
