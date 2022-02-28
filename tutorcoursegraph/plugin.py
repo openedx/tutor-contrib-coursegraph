@@ -27,6 +27,7 @@ config = {
         "NEO4J_USER": "neo4j",
         "NEO4J_SECURE": True,
         "NEO4J_PROTOCOL": "bolt",
+        "DUMP_COURSE_ON_PUBLISH": True,
     },
 }
 
