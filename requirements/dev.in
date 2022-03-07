@@ -4,6 +4,7 @@
 black
 pyinstaller
 pylint
+pyyaml  # For tests/test-install.sh
 twine
-types-PyYAML
+types-pyyaml
 types-setuptools

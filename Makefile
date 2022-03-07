@@ -9,7 +9,7 @@
 PACKAGE=tutorcoursegraph
 PROJECT=tutor-contrib-coursegraph
 
-SOURCES=./setup.py ./$(PACKAGE) ./tests
+SOURCES=./setup.py ./$(PACKAGE)
 
 UPGRADE=CUSTOM_COMPILE_COMMAND='make upgrade' pip-compile --upgrade
 
@@ -48,8 +48,8 @@ test-format: ## Run code formatting tests
 test-lint: ## Run code linting tests
 	pylint ${SOURCES}
 
-test-unit: ## Run unit tests
-	python -m unittest discover tests
+test-install: ## Run installation test script
+	tests/test-install.sh
 
 test-types: ## Check type definitions
 	mypy --ignore-missing-imports --strict ${SOURCES}
