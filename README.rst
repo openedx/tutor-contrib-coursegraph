@@ -115,7 +115,7 @@ Configuration
      - Neo4j Docker image to be pulled and used. By default, based on your ``DOCKER_REGISTRY`` and ``COURSEGRAPH_NEO4J_VERSION``.
    * - ``COURSEGRAPH_NEO4J_HOST``
      - str
-     - ``"coursegraph.www.openedx.com"``
+     - Prod: ``"coursegraph.www.openedx.com"``, Dev: ``"coursegraph.local.overhang.io"``
      - Hostname of CourseGraph. By default, based on your ``LMS_HOST``.
    * - ``COURSEGRAPH_NEO4J_BOLT_PORT``
      - int
