@@ -111,11 +111,11 @@ The Tutor plugin can be configured with several settings. The names of all setti
      - str
      - ``"3.5.28"``
      - Version of Neo4j to use. Appended to default image. Overriding ``NEO4J_DOCKER_IMAGE`` annuls this setting.
-   * - ``COURSEGRAPH_NEO4J_DOCKER_IMAGE``
+   * - ``NEO4J_DOCKER_IMAGE``
      - str
      - ``"docker.io/neo4j:3.5.28"``
      - Neo4j Docker image to be pulled and used. By default, based on your ``DOCKER_REGISTRY`` and ``COURSEGRAPH_NEO4J_VERSION``.
-   * - ``COURSEGRAPH_NEO4J_HOST``
+   * - ``NEO4J_HOST``
      - str
      - Prod: ``"coursegraph.www.openedx.com"``, Dev: ``"coursegraph.local.overhang.io"``
      - Hostname of CourseGraph. By default, based on your ``LMS_HOST``.
