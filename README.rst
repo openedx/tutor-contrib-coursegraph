@@ -1,4 +1,4 @@
-coursegraph plugin for `Tutor <https://docs.tutor.overhang.io>`__
+CourseGraph plugin for `Tutor <https://docs.tutor.overhang.io>`__
 ===================================================================================
 
 Installation
