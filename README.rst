@@ -159,12 +159,16 @@ Run all tests::
   mv tutor_config.bak.yml $(tutor config printroot)/config.yml  # restore original config
 
 
-Contributing
-============
+Status & Contributing
+=====================
 
-tutor-contrib-coursegraph was developed as part of the `Tutor Adoption Initiative`_. It is currently mainained by me, Kyle McCormick.
+tutor-contrib-coursegraph is being developed as part of the `Tutor Adoption Initiative`_. It is currently a work-in-progress, in that:
 
-If you're interested in contribution, feel free to open an issue or a pull request. I'll try to give it a first look within a week.
+* It has been tested with Tutor in development mode.
+* It has been partially tested with Tutor in local server mode.
+* It does not yet work with Tutor in Kubernetes mode.
+
+If you're interested in contribution, feel free to open an issue or a pull request. We'll try to give it a first look within a week.
 
 .. _Tutor Adoption Initiative: https://openedx.atlassian.net/wiki/spaces/COMM/pages/3315335223/Tutor+Adoption+Initiative
 
