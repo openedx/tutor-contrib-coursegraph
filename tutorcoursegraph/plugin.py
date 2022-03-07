@@ -25,7 +25,6 @@ config = {
         "NEO4J_HOST": "coursegraph.{{ LMS_HOST }}",
         "NEO4J_BOLT_PORT": 7687,
         "NEO4J_HTTP_PORT": 7474,
-        "NEO4J_USER": "neo4j",
         "NEO4J_SECURE": True,
         "NEO4J_PROTOCOL": "bolt",
         "DUMP_COURSE_ON_PUBLISH": True,

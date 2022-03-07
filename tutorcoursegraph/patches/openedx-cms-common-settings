@@ -5,7 +5,7 @@ COURSEGRAPH_CONNECTION = {
     "protocol": "{{ COURSEGRAPH_NEO4J_PROTOCOL }}",
     "secure": {{ COURSEGRAPH_NEO4J_SECURE }},
     "host": "{{ COURSEGRAPH_NEO4J_HOST }}",
-    "user": "{{ COURSEGRAPH_NEO4J_USER }}",
+    "user": "neo4j",
 
   {% if COURSEGRAPH_NEO4J_PROTOCOL == 'http' %}
     "port": {{ COURSEGRAPH_NEO4J_HTTP_PORT }},
