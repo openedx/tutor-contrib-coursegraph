@@ -94,21 +94,23 @@ or by using a CMS management command::
 Configuration
 *************
 
+The Tutor plugin can be configured with several settings. The names of all settings below are prefixed with ``COURSEGRAPH_``.
+
 .. list-table::
    :header-rows: 1
 
-   * - **Setting**
+   * - **CourseGraph Setting**
      - **Type**
      - **Default**
      - **Description**
-   * - ``COURSEGRAPH_NEO4J_PASSWORD``
+   * - ``NEO4J_PASSWORD``
      - str
      - (20 random characters)
      - *Initial* password set for Neo4j, and password used to connect to Neo4j. To change after initialization, password must be updated both here and manually within Neo4j.
-   * - ``COURSEGRAPH_NEO4J_VERSION``
+   * - ``NEO4J_VERSION``
      - str
      - ``"3.5.28"``
-     - Version of Neo4j to use. Appended to default image. Overriding ``COURSEGRAPH_NEO4J_DOCKER_IMAGE`` annuls this setting.
+     - Version of Neo4j to use. Appended to default image. Overriding ``NEO4J_DOCKER_IMAGE`` annuls this setting.
    * - ``COURSEGRAPH_NEO4J_DOCKER_IMAGE``
      - str
      - ``"docker.io/neo4j:3.5.28"``
@@ -117,23 +119,23 @@ Configuration
      - str
      - Prod: ``"coursegraph.www.openedx.com"``, Dev: ``"coursegraph.local.overhang.io"``
      - Hostname of CourseGraph. By default, based on your ``LMS_HOST``.
-   * - ``COURSEGRAPH_NEO4J_BOLT_PORT``
+   * - ``NEO4J_BOLT_PORT``
      - int
      - ``7687``
      - Port to be used for Bolt connections to Neo4j
-   * - ``COURSEGRAPH_NEO4J_HTTP_PORT``
+   * - ``NEO4J_HTTP_PORT``
      - int
      - ``7474``
      - Port to be used for HTTP connections to Neo4j, including Neo4j Web browser interface
-   * - ``COURSEGRAPH_NEO4J_SECURE``
+   * - ``NEO4J_SECURE``
      - bool
      - ``true``
      - Should CMS use TLS when connecting to Neo4j over Bolt or HTTP?
-   * - ``COURSEGRAPH_NEO4J_PROTOCOL``
+   * - ``NEO4J_PROTOCOL``
      - str
      - ``"bolt"``
      - Protocol CMS will use to connect to Neo4j. Should be ``"http"`` or ``"bolt"``.
-   * - ``COURSEGRAPH_DUMP_COURSE_ON_PUBLISH``
+   * - ``DUMP_COURSE_ON_PUBLISH``
      - bool
      - ``true``
      - Should CMS automatically dump a course to CourseGraph whenever it's published? If disabled, you will instead need to periodically dump courses via the management command or admin console.
