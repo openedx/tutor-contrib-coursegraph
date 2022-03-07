@@ -1,8 +1,7 @@
-.PHONY: build-pythonpackage coverage coverage-browse-report coverage-html \
-        coverage-report coverage-tests dev-requirements format help \
-        push-pythonpackage release release-push release-tag release-unsafe \
-        requirements test test-format test-k8s test-lint test-pythonpackage \
-        test-types test-unit upgrade version
+.PHONY: build-pythonpackage dev-requirements format help push-pythonpackage \
+        release release-push release-tag release-unsafe requirements test \
+        test-format test-install test-k8s test-lint test-pythonpackage \
+        test-types upgrade version
 
 .DEFAULT_GOAL := help
 
