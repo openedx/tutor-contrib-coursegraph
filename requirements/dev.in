@@ -2,7 +2,6 @@
 -r piptools.txt
 
 black
-coverage
 pyinstaller
 pylint
 twine

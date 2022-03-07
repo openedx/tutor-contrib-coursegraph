@@ -63,23 +63,6 @@ test-k8s: ## Validate the k8s format with kubectl. Not part of the standard test
 format: ## Format code automatically
 	black ${SOURCES}
 
-###### Code coverage
-
-coverage: ## Run unit-tests before analyzing code coverage and generate report
-	$(MAKE) --keep-going coverage-tests coverage-report
-
-coverage-tests: ## Run unit-tests and analyze code coverage
-	coverage run -m unittest discover
-
-coverage-report: ## Generate CLI report for the code coverage
-	coverage report
-
-coverage-html: coverage-report ## Generate HTML report for the code coverage
-	coverage html
-
-coverage-browse-report: coverage-html ## Open the HTML report in the browser
-	sensible-browser htmlcov/index.html
-
 ###### Deployment
 
 release: test release-unsafe ## Create a release tag and push it to origin
