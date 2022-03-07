@@ -1,0 +1,10 @@
+-r base.txt
+-r piptools.txt
+
+black
+coverage
+pyinstaller
+pylint
+twine
+types-PyYAML
+types-setuptools

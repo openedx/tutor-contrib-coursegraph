@@ -44,7 +44,7 @@ def patches() -> Dict[str, str]:
     all_patches = {}
     patches_dir = pkg_resources.resource_filename("tutorcoursegraph", "patches")
     for path in glob(os.path.join(patches_dir, "*")):
-        with open(path) as patch_file:
+        with open(path, encoding="utf-8") as patch_file:
             name = os.path.basename(path)
             content = patch_file.read()
             all_patches[name] = content
