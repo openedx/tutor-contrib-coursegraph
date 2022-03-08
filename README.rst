@@ -1,7 +1,7 @@
 CourseGraph plugin for `Tutor`_
 ----------------------------------------------------------------
 
-|Neo4j|_ |plus| |Tutor|_  
+|Neo4j|_ |plus| |Tutor|_
 
 CourseGraph is a tool that allows `Open edX`_ developers and support specialists to inspect their platform instance's learning content. It consists of two simple components:
 
@@ -10,8 +10,8 @@ CourseGraph is a tool that allows `Open edX`_ developers and support specialists
 
 CourseGraph was initially an internal tool at edX, Inc., but as of the Maple release it was `shared with the greater Open edX community`_. This Tutor plugin aims to provide an easy mechanism for developers and operators to trial and deploy CourseGraph.
 
-.. _Tutor: <https://docs.tutor.overhang.io>
-.. _Open edX: <https://openedx.org>
+.. _Tutor: https://docs.tutor.overhang.io
+.. _Open edX: https://openedx.org
 .. _CourseGraph support application: https://github.com/openedx/edx-platform/tree/master/cms/djangoapps/coursegraph#coursegraph-support
 .. _Neo4j: https://neo4j.com
 .. _shared with the greater Open edX community: https://openedx.org/blog/announcing-coursegraph-a-new-tool-in-the-maple-release/
@@ -31,7 +31,6 @@ CourseGraph was initially an internal tool at edX, Inc., but as of the Maple rel
    :width: 400
    :align: middle
    :alt: Tutor logo
-
 
 Status & Contributing
 =====================
