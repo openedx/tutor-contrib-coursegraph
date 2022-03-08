@@ -1,15 +1,14 @@
-.PHONY: build-pythonpackage coverage coverage-browse-report coverage-html \
-        coverage-report coverage-tests dev-requirements format help \
-        push-pythonpackage release release-push release-tag release-unsafe \
-        requirements test test-format test-k8s test-lint test-pythonpackage \
-        test-types test-unit upgrade version
+.PHONY: build-pythonpackage dev-requirements format help push-pythonpackage \
+        release release-push release-tag release-unsafe requirements test \
+        test-format test-install test-k8s test-lint test-pythonpackage \
+        test-types upgrade version
 
 .DEFAULT_GOAL := help
 
 PACKAGE=tutorcoursegraph
 PROJECT=tutor-contrib-coursegraph
 
-SOURCES=./setup.py ./$(PACKAGE) ./tests
+SOURCES=./setup.py ./$(PACKAGE)
 
 UPGRADE=CUSTOM_COMPILE_COMMAND='make upgrade' pip-compile --upgrade
 
@@ -48,8 +47,8 @@ test-format: ## Run code formatting tests
 test-lint: ## Run code linting tests
 	pylint ${SOURCES}
 
-test-unit: ## Run unit tests
-	python -m unittest discover tests
+test-install: ## Run installation test script
+	tests/test-install.sh
 
 test-types: ## Check type definitions
 	mypy --ignore-missing-imports --strict ${SOURCES}
