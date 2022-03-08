@@ -45,6 +45,27 @@ If you're interested in contributing, feel free to open an issue or a pull reque
 
 .. _Tutor Adoption Initiative: https://openedx.atlassian.net/wiki/spaces/COMM/pages/3315335223/Tutor+Adoption+Initiative
 
+Branches
+********
+
+This plugin uses the same branching model as Tutor:
+
+.. list-table::
+
+   - * ``nightly``
+     * Latest development. Compatible with Tutor Nightly and Open edX master. Merged into ``master`` at each Open edX named release.
+
+   - * ``master``
+     * Latest stable release and patches. Compatible with Tutor master and latest Open edX named release. Merged into ``nightly`` continuously.
+
+The syncing between branches is currently done manually.
+
+If your change is backwards-compatible with the last Open edX named release, then propose it against ``master``. If not, then propose it against ``nightly``.
+
+This repository aims to adhear to all relevant `Open edX Proposals`_, including `OEP-55, Conventional Commits`_.
+
+.. _Open edX Proposals: https://open-edx-proposals.readthedocs.io
+.. _OEP-55, Conventional Commits: https://open-edx-proposals.readthedocs.io/en/latest/best-practices/oep-0051-bp-conventional-commits.html
 
 Installation
 ============
