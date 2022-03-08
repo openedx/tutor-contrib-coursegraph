@@ -62,7 +62,7 @@ The syncing between branches is currently done manually.
 
 If your change is backwards-compatible with the last Open edX named release, then propose it against ``master``. If not, then propose it against ``nightly``.
 
-This repository aims to adhear to all relevant `Open edX Proposals`_, including `OEP-55, Conventional Commits`_.
+This repository aims to adhere to all relevant `Open edX Proposals`_, including `OEP-55, Conventional Commits`_.
 
 .. _Open edX Proposals: https://open-edx-proposals.readthedocs.io
 .. _OEP-55, Conventional Commits: https://open-edx-proposals.readthedocs.io/en/latest/best-practices/oep-0051-bp-conventional-commits.html
