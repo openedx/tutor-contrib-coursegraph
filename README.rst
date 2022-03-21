@@ -109,7 +109,7 @@ Usage
 
 Once CourseGraph is started and courses have been dumped to it, the tool can be viewed at::
 
-  http://coursegraph.{{ LMS_HOST }}:{{ COURSEGRAPH_NEO4J_HTTP_PORT }}
+  http://coursegraph.{{ LMS_HOST }}
 
 For example, if your LMS is at ``openedx.example.edu`` and you're using the default Neo4j HTTP port, that'd be::
 

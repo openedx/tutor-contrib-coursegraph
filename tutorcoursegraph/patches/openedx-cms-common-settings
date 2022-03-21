@@ -2,18 +2,11 @@
 COURSEGRAPH_DUMP_COURSE_ON_PUBLISH = {{ COURSEGRAPH_DUMP_COURSE_ON_PUBLISH }}
 
 COURSEGRAPH_CONNECTION = {
-    "protocol": "{{ COURSEGRAPH_NEO4J_PROTOCOL }}",
-    "secure": {{ COURSEGRAPH_NEO4J_SECURE }},
-    "host": "{{ COURSEGRAPH_NEO4J_HOST }}",
+    "protocol": "bolt",
+    "secure": {{ COURSEGRAPH_NEO4J_BOLT_SECURE }},
+    "host": "{{ COURSEGRAPH_NEO4J_BOLT_HOST }}",
+    "port": 7687,
     "user": "neo4j",
-
-  {% if COURSEGRAPH_NEO4J_PROTOCOL == 'http' %}
-    "port": {{ COURSEGRAPH_NEO4J_HTTP_PORT }},
-  {% else %}
-    "port": {{ COURSEGRAPH_NEO4J_BOLT_PORT }},
-    ""
-  {% endif %}
-
   {% if COURSEGRAPH_NEO4J_PASSWORD %}
     "password": "{{ COURSEGRAPH_NEO4J_PASSWORD }}",
   {% else %}

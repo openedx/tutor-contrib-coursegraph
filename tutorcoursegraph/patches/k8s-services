@@ -7,10 +7,10 @@ spec:
   type: NodePort
   ports:
     - name: http
-      port: {{ COURSEGRAPH_NEO4J_HTTP_PORT }}
+      port: 7474
       protocol: TCP
     - name: bolt
-      port: {{ COURSEGRAPH_NEO4J_BOLT_PORT }}
+      port: 7687
       protocol: TCP
   selector:
     app.kubernetes.io/name: coursegraph
