@@ -19,7 +19,7 @@ spec:
         runAsGroup: 1000
       containers:
         - name: coursegraph
-          image: {{ COURSEGRAPH_NEO4J_IMAGE }}
+          image: {{ COURSEGRAPH_NEO4J_DOCKER_IMAGE }}
           ports:
             - containerPort: {{ COURSEGRAPH_NEO4J_HTTP_PORT }}
             - containerPort: {{ COURSEGRAPH_NEO4J_BOLT_PORT }}
