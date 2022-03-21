@@ -1,0 +1,8 @@
+# CourseGraph
+{{ COURSEGRAPH_NEO4J_HOST }}{$default_site_port} {
+    request_body {
+        max_size 10MB
+    }
+
+    import proxy "coursegraph:{{ COURSEGRAPH_NEO4J_HTTP_PORT }}"
+}
