@@ -23,6 +23,5 @@ spec:
           ports:
             - containerPort: {{ COURSEGRAPH_NEO4J_HTTP_PORT }}
             - containerPort: {{ COURSEGRAPH_NEO4J_BOLT_PORT }}
-              value: course_discovery.settings.tutor.production
           securityContext:
             allowPrivilegeEscalation: false
