@@ -4,5 +4,10 @@
         max_size 10MB
     }
 
+    # Expose Neo4j's HTTP port so users can view Neo4j Web interface.
     import proxy "coursegraph:{{ COURSEGRAPH_NEO4J_HTTP_PORT }}"
+
+    # Note: We do not expose Neo4j's Bolt interface to the outside world.
+    # CMS needs to connect to Neo4j over bolt, but it can use Neo4j's
+    # internal IP for that, as configured in k8s-services.
 }
