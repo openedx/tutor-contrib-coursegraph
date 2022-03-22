@@ -14,12 +14,16 @@ spec:
       labels:
         app.kubernetes.io/name: coursegraph
     spec:
-      securityContext:
-        runAsUser: 1000
-        runAsGroup: 1000
       containers:
         - name: coursegraph
           image: {{ COURSEGRAPH_NEO4J_DOCKER_IMAGE }}
+          env:
+            - name: NEO4J_AUTH
+          {% if COURSEGRAPH_NEO4J_PASSWORD %}
+              value: 'neo4j/{{ COURSEGRAPH_NEO4J_PASSWORD }}'
+          {% else %}
+              value: 'none'
+          {% endif %}
           ports:
             - containerPort: 7474  # HTTP
             - containerPort: 7687  # Bolt

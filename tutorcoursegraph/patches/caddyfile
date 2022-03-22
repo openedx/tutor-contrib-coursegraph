@@ -5,16 +5,16 @@
         max_size 10MB
     }
 
+    redir / /browser/?dbms=bolt://{{ COURSEGRAPH_NEO4J_BOLT_HOST }}:{% if COURSEGRAPH_NEO4J_BOLT_SECURE %}443{% else %}80{% endif %}
+
     import proxy "coursegraph:7474"
 }
 
 # CourseGraph Bolt interface
-{{ COURSEGRAPH_NEO4J_BOLT_HOST }}{$default_site_port} {
+{{ COURSEGRAPH_NEO4J_BOLT_HOST }}:{% if COURSEGRAPH_NEO4J_BOLT_SECURE %}443{% else %}80{% endif %} {
     request_body {
         max_size 10MB
     }
 
     import proxy "coursegraph:7687"
 }
-
-

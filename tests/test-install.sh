@@ -5,8 +5,8 @@ set -xeuo pipefail
 
 FAKE_DOCKER_REGISTRY=fakeregistry.example.com/
 FAKE_VERSION=9.9.9
-FAKE_BOLT_PORT=7999
-FAKE_HOST=fakecoursegraph.example.edu
+FAKE_WEB_HOST=fakecoursegraph.example.edu
+FAKE_SECURE=false
 
 EXPECTED_DOCKER_IMAGE="fakeregistry.example.com/neo4j:9.9.9"
 EXPECTED_BOLT_PORT_MAPPING="7687:7999"
@@ -33,8 +33,8 @@ tutor plugins enable coursegraph
 tutor config save \
 	--set DOCKER_REGISTRY="$FAKE_DOCKER_REGISTRY" \
 	--set COURSEGRAPH_NEO4J_VERSION="$FAKE_VERSION" \
-	--set COURSEGRAPH_NEO4J_HOST="$FAKE_HOST" \
-	--set COURSEGRAPH_NEO4J_BOLT_PORT="$FAKE_BOLT_PORT"
+	--set COURSEGRAPH_NEO4J_WEB_HOST="$FAKE_HOST" \
+	--set COURSEGRAPH_NEO4J_BOLT_SECURE="$FAKE_SECURE"
 
 set +x
 
