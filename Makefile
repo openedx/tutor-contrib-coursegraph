@@ -56,9 +56,6 @@ test-types: ## Check type definitions
 test-pythonpackage: build-pythonpackage ## Test that package can be uploaded to pypi
 	twine check dist/$(PROJECT)-$(shell make version).tar.gz
 
-test-k8s: ## Validate the k8s format with kubectl. Not part of the standard test suite.
-	tutor k8s apply --dry-run=client --validate=true
-
 format: ## Format code automatically
 	black ${SOURCES}
 
