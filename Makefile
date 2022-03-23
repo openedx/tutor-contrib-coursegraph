@@ -39,7 +39,7 @@ build-pythonpackage: ## Build Python packages ready to upload to pypi
 push-pythonpackage: ## Push python package to pypi
 	twine upload --skip-existing dist/$(PROJECT)-$(shell make version).tar.gz
 
-test: test-lint test-unit test-types test-format test-pythonpackage ## Run all tests by decreasing order of priority
+test: test-lint test-install test-types test-format test-pythonpackage ## Run all tests by decreasing order of priority
 
 test-format: ## Run code formatting tests
 	black --check --diff ${SOURCES}
@@ -55,9 +55,6 @@ test-types: ## Check type definitions
 
 test-pythonpackage: build-pythonpackage ## Test that package can be uploaded to pypi
 	twine check dist/$(PROJECT)-$(shell make version).tar.gz
-
-test-k8s: ## Validate the k8s format with kubectl. Not part of the standard test suite.
-	tutor k8s apply --dry-run=client --validate=true
 
 format: ## Format code automatically
 	black ${SOURCES}
