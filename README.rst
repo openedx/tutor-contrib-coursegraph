@@ -35,11 +35,11 @@ CourseGraph was initially an internal tool at edX, Inc., but as of the Maple rel
 Status & Contributing
 =====================
 
-tutor-contrib-coursegraph is being developed as part of the `Tutor Adoption Initiative`_. It is currently a work-in-progress, in that:
+tutor-contrib-coursegraph is being developed as part of the `Tutor Adoption Initiative`_. It is currently a work-in-progress:
 
-* It has been tested with Tutor in development mode.
-* It has been partially tested with Tutor in local server mode.
-* It does not yet work with Tutor in Kubernetes mode.
+* The plugin has been tested with Tutor in development mode, but it needs more testing to ensure it works in local and Kubernetes mode.
+* It does not yet provide support for Neo4j users other than the admin user (``neo4j``).
+* It has not yet been tested with ``ENABLE_HTTPS=true``.
 
 If you're interested in contributing, feel free to open an issue or a pull request. We'll try to give it a first look within a week.
 
@@ -107,15 +107,39 @@ Start CourseGraph::
 Usage
 =====
 
+Finding the Web interface
+*************************
+
 Once CourseGraph is started and courses have been dumped to it, the tool can be viewed at::
 
-  http://coursegraph.{{ LMS_HOST }}:{{ COURSEGRAPH_NEO4J_HTTP_PORT }}
+  http://coursegraph.{{ LMS_HOST }}
 
 For example, if your LMS is at ``openedx.example.edu`` and you're using the default Neo4j HTTP port, that'd be::
 
-  http://coursegraph.openedx.example.edu:7474
+  http://coursegraph.openedx.example.edu
 
-At the prompt, your credentials should be:
+When running in development mode, you'll also need to specify port 7474. For example::
+
+  http://coursegraph.local.overhang.io:7474
+
+Using the Web interface
+***********************
+
+The **Connect URL** should already be populated correctly. If it's not, here's what to enter, substituting ``openedx.example.edu`` for your own LMS root domain:
+
+.. list-table::
+   :header-rows: 1
+
+   * - **Mode**
+     - **Connect URL**
+   * - ``tutor k8s``
+     - bolt://bolt.coursegraph.openedx.example.edu:80
+   * - ``tutor local``
+     - bolt://bolt.coursegraph.openedx.example.edu:80
+   * - ``tutor dev``
+     - bolt://coursegraph.local.overhang.io:7687
+
+By default, you can log in using **Username / Password** authentication:
 
 .. list-table::
 
@@ -123,6 +147,8 @@ At the prompt, your credentials should be:
      - ``"neo4j"``
    * - **Password**
      - ``$(tutor config printvalue COURSEGRAPH_NEO4J_PASSWORD)``
+
+If you set ``COURSEGRAPH_NEO4J_PASSWORD`` to ``null`` before initializing CourseGraph, then instead select **No Authentication**.
 
 Now that you're in, try `querying your courses`_!
 
@@ -182,22 +208,6 @@ The Tutor plugin can be configured with several settings. The names of all setti
      - str
      - Prod: ``"coursegraph.www.openedx.com"``, Dev: ``"coursegraph.local.overhang.io"``
      - Hostname of CourseGraph. By default, based on your ``LMS_HOST``.
-   * - ``NEO4J_BOLT_PORT``
-     - int
-     - ``7687``
-     - Port to be used for Bolt connections to Neo4j
-   * - ``NEO4J_HTTP_PORT``
-     - int
-     - ``7474``
-     - Port to be used for HTTP connections to Neo4j, including Neo4j Web browser interface
-   * - ``NEO4J_SECURE``
-     - bool
-     - ``true``
-     - Should CMS use TLS when connecting to Neo4j over Bolt or HTTP?
-   * - ``NEO4J_PROTOCOL``
-     - str
-     - ``"bolt"``
-     - Protocol CMS will use to connect to Neo4j. Should be ``"http"`` or ``"bolt"``.
    * - ``DUMP_COURSE_ON_PUBLISH``
      - bool
      - ``true``

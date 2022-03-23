@@ -1,0 +1,33 @@
+
+# CourseGraph Web frontend.
+{{ COURSEGRAPH_NEO4J_HOST }}{$default_site_port} {
+    request_body {
+        max_size 10MB
+    }
+
+    # By default, the Web interface will recommend `bolt://{{ COURSEGRAPH_NEO4J_HOST }}:7687`
+    # to the user as the Neo4j connection string. To help the user out, redirect them so that they are
+    # recommended the correct Neo4j connection string.
+    redir / /browser/?dbms=bolt://bolt.{{ COURSEGRAPH_NEO4J_HOST }}{$default_site_port}
+
+    import proxy "coursegraph:7474"
+}
+
+# CourseGraph Bolt interface.
+# The Web frontend uses this interface to communicate with the Neo4j backend via Bolt
+# over a WebSocket.
+#
+# We put the interface behind the `bolt.` sub-hostname of the canonical CourseGraph hostname,
+# routing external Bolt traffic at port {80,443} to port 7687 of the internal service.
+#
+# Why not just allow Bolt traffic on `{{ COURSEGRAPH_NEO4J_HOST }}:7687`?
+# Because Caddy insists on using TLS for anything other than port 80 traffic.
+# So, to support `ENABLE_HTTPS=false` sites, we must accept unencrypted Bolt traffic
+# at port 80 specifically.
+bolt.{{ COURSEGRAPH_NEO4J_HOST }}{$default_site_port} {
+    request_body {
+        max_size 10MB
+    }
+
+    import proxy "coursegraph:7687"
+}

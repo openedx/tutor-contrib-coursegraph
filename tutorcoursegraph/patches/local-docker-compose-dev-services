@@ -1,7 +1,7 @@
 coursegraph:
   ports:
-    - "7474:{{ COURSEGRAPH_NEO4J_HTTP_PORT }}"  # Expose Web interface
-    - "7687:{{ COURSEGRAPH_NEO4J_BOLT_PORT }}"  # Expose Bolt interface
+    - "7474:7474"  # Expose Web interface to host.
+    - "7687:7687"  # Expose Bolt interface to host.
   networks:
     default:
       aliases:
