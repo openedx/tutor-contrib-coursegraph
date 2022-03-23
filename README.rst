@@ -35,11 +35,11 @@ CourseGraph was initially an internal tool at edX, Inc., but as of the Maple rel
 Status & Contributing
 =====================
 
-tutor-contrib-coursegraph is being developed as part of the `Tutor Adoption Initiative`_. It is currently a work-in-progress:
+tutor-contrib-coursegraph is being developed as part of the `Tutor Adoption Initiative`_. Currently, the plugin osentisbly works with ``tutor dev``, ``tutor local``, and ``tutor k8s``, but more testing is needed to ensure that it's production-ready. Furthermore, there are several outstanding issues:
 
-* The plugin has been tested with Tutor in development mode, but it needs more testing to ensure it works in local and Kubernetes mode.
-* It does not yet provide support for Neo4j users other than the admin user (``neo4j``).
-* It has not yet been tested with ``ENABLE_HTTPS=true``.
+* The plugin has not yet been tested with a Tutor deployment in which ``ENABLE_HTTPS=true``.
+* As a secret, ``COURSEGRAPH_NEO4J_PASSWORD`` may need to be handled more carefully. It is currently dumped into CMS settings files in plaintext.
+* Under ``tutor k8s``, CourseGraph data is not persisted. It is stored in the Neo4j container and gets destroyed when the pod is stopped.
 
 If you're interested in contributing, feel free to open an issue or a pull request. We'll try to give it a first look within a week.
 
@@ -163,6 +163,33 @@ Operations
 
 Operating CourseGraph is fairly straightforward, especially if you treat CourseGraph data as a non-critical secondary view into the CMS's course data. That is: you should be willing to completely drop and re-generate the CourseGraph data stord in Neo4j. By doing so, you avoid needing to back up Neo4j, and you de-risk the Neo4j schema version upgrades that you'll need to perform over time with new Open edX releases.
 
+.. _Managing Users:
+
+Managing Users
+**************
+
+This plugin currently ships with Neo4j 3.5 Community Edition, which provides some very rudimentary authentication controls via the Neo4j Web console. The Neo4j 3.5 page on `procedures for native user management`_ describes the available operations. Take note that only four operations are available in the Community Edition:
+
+* ``CALL dbms.security.createUser(<username>, <password>, <requirePasswordChange>)``
+* ``CALL dbms.security.changePassword(<password>, <requirePasswordChange>)``
+* ``CALL dbms.security.deleteUser(<username>)``
+* ``CALL dbms.security.listUsers()``
+
+Since authorization control is not availble in the Neo4j Community Edition, all users will have full administrative control over Neo4j data, including ability to to read all graphs, modify nodes, modify relationships, and create new users. Because of this, access to any set of CourseGraph Neo4j credentials confers read access to your entire course catalog, as well as the ability to insert fake data into CourseGraph. As such, if your CourseGraph instance is accessible by the public, then **all Neo4j credential sets should be treated as secrets**.
+
+By default, this plugin initializes Neo4j with one user, whose username is ``neo4j`` and whose password is set from the ``COURSEGRAPH_NEO4J_PASSWORD`` Tutor setting. When CMS pushes data to Neo4j, it also authenticates with ``neo4j`` as its username and ``COURSEGRAPH_NEO4J_PASSWORD`` as its password. Keep in mind that:
+
+* If the ``neo4j`` user is destroyed, CMS will be unable to dump new data to Neo4j until a new ``neo4j`` user is created.
+* Once CourseGraph is initialized, changing ``COURSEGRAPH_NEO4J_PASSWORD`` alone does not update the ``neo4j`` user's password. You will need to use ``CALL dbms.security.changePassword(...)`` from the Neo4j Web console for the password change to take effect.
+
+Finally, initializing CourseGraph with ``COURSEGRAPH_NEO4J_PASSWORD`` set to ``!!null`` disables authentication entirely. Anyone with access to CourseGraph will have full read and write access to the Neo4j database. Obviously, this is only suitable when CourseGraph endpoint access is restricted to trusted private network.
+
+.. _Procedures for native user management: https://neo4j.com/docs/operations-manual/3.5/authentication-authorization/native-user-role-management/procedures/
+
+
+Managing Data
+*************
+
 By default, this plugin configures CMS to dump each course to CourseGraph whenever it is published, allowing you to "set and forget" the tool. You can disable this behavior by setting ``COURSEGRAPH_DUMP_COURSE_ON_PUBLISH`` to ``false``, regenerating your Tutor environment, and restarting CMS.
 
 If you have disabled automatic dumping, then you'll need to periodically refresh the data in CourseGraph manually. You can do so via the CMS administration console at, under the **COURSE GRAPH COURSE DUMPS** page in the **COURSE GRAPH** app:
@@ -195,7 +222,7 @@ The Tutor plugin can be configured with several settings. The names of all setti
    * - ``NEO4J_PASSWORD``
      - str
      - (20 random characters)
-     - *Initial* password set for Neo4j, and password used to connect to Neo4j. To change after initialization, password must be updated both here and manually within Neo4j.
+     - *Initial* password set for ``neo4j`` user, as well as password used to by CMS to authenticate as ``neo4j`` user. See `Managing Users`_ for more details.
    * - ``NEO4J_VERSION``
      - str
      - ``"3.5.28"``
