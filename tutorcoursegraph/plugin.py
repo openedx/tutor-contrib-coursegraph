@@ -22,9 +22,7 @@ config = {
         "VERSION": __version__,
         "NEO4J_VERSION": "3.5.28",
         "NEO4J_DOCKER_IMAGE": "{{ DOCKER_REGISTRY }}neo4j:{{ COURSEGRAPH_NEO4J_VERSION }}",
-        "NEO4J_WEB_HOST": "coursegraph.{{ LMS_HOST }}",
-        "NEO4J_BOLT_HOST": "bolt.coursegraph.{{ LMS_HOST }}",
-        "NEO4J_BOLT_SECURE": True,
+        "NEO4J_HOST": "coursegraph.{{ LMS_HOST }}",
         "DUMP_COURSE_ON_PUBLISH": True,
     },
 }

@@ -1,11 +1,10 @@
 coursegraph:
   ports:
-    - "7474:7474"  # Expose Web interface
-    - "7687:7687"  # Expose Bolt interface
+    - "7474:7474"  # Expose Web interface to host.
+    - "7687:7687"  # Expose Bolt interface to host.
   networks:
     default:
       aliases:
-        - "{{ COURSEGRAPH_NEO4J_WEB_HOST }}"
-        - "{{ COURSEGRAPH_NEO4J_BOLT_HOST }}"
+        - "{{ COURSEGRAPH_NEO4J_HOST }}"
   tty: true         # Allow TTY-enabled shell on service with `tutor dev exec coursegraph bash`.
   stdin_open: true  # Allow attachment to service with `docker-compose attach`.

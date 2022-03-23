@@ -1,2 +1,16 @@
 
 COURSEGRAPH_DUMP_COURSE_ON_PUBLISH = {{ COURSEGRAPH_DUMP_COURSE_ON_PUBLISH }}
+
+COURSEGRAPH_CONNECTION = {
+    "protocol": "bolt",     # Plugin only supports Bolt currently.
+    "secure": False,        # Connection from CMS to Neo4j will not be encrypted.
+    "host": "coursegraph",  # This works as a K8s-cluster-local or Docker-network-local hostname.
+    "user": "neo4j",        # Default Neo4j db user with full write access.
+    "port": 7687,           # Canonical port for Bolt traffic.
+
+  {% if COURSEGRAPH_NEO4J_PASSWORD %}
+    "password": "{{ COURSEGRAPH_NEO4J_PASSWORD }}",
+  {% else %}
+    "password": None,
+  {% endif %}
+}
