@@ -39,7 +39,7 @@ build-pythonpackage: ## Build Python packages ready to upload to pypi
 push-pythonpackage: ## Push python package to pypi
 	twine upload --skip-existing dist/$(PROJECT)-$(shell make version).tar.gz
 
-test: test-lint test-unit test-types test-format test-pythonpackage ## Run all tests by decreasing order of priority
+test: test-lint test-install test-types test-format test-pythonpackage ## Run all tests by decreasing order of priority
 
 test-format: ## Run code formatting tests
 	black --check --diff ${SOURCES}
