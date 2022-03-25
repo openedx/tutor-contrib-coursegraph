@@ -11,7 +11,6 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0  # all branches and tags
-          ref: nightly
       - name: Check out nightly
         run: git checkout nightly
       - name: Merge master into nightly
