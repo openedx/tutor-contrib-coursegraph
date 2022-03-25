@@ -1,18 +1,19 @@
-name: Merge all changes on master to nightly
+name: Merge master into nightly
 
 on:
   push:
     branches: [ master ]
 
 jobs:
-  sync:
+  merge-to-nightly:
     runs-on: ubuntu-latest
     steps:
-      - name: Fetch all branches and check out nightly
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
         with:
           fetch-depth: 0  # all branches and tags
           ref: nightly
+      - name: Check out nightly
+        run: git checkout nightly
       - name: Merge master into nightly
         run: git merge master
       - name: Push nightly
