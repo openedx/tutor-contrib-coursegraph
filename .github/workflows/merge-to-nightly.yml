@@ -1,3 +1,18 @@
+# Every time commits are pushed to master, this workflow
+# merges those commits into nightly. The idea is that commits
+# against the plugin's stable branch (master) should always
+# be reflected on its bleeding-edge branch (nightly) as well.
+#
+# If there is a merge commit, it is associated with
+# "github-actions[bot]", which is not a real user account.
+#
+# Assumptions:
+#  * The default branch is master, not main.
+#  * GitHub Actions have been given access to read & write repository
+#    contents (from repository settings).
+#  * Write access is sufficient for pushing to nightly. Requiring
+#    PRs for nightly would break this workflow.
+
 name: Merge master into nightly
 
 on:
