@@ -1,0 +1,23 @@
+name: Merge master into nightly
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  merge-to-nightly:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0  # all branches and tags
+      - name: Check out nightly
+        run: git checkout nightly
+      - name: Set git identity
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+      - name: Merge master into nightly
+        run: git merge master
+      - name: Push nightly
+        run: git push origin nightly
