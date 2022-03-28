@@ -35,13 +35,9 @@ CourseGraph was initially an internal tool at edX, Inc., but as of the Maple rel
 Status & Contributing
 =====================
 
-tutor-contrib-coursegraph is being developed as part of the `Tutor Adoption Initiative`_. Currently, the plugin osentisbly works with ``tutor dev``, ``tutor local``, and ``tutor k8s``, but more testing is needed to ensure that it's production-ready. Furthermore, there are several outstanding issues:
+This is **Beta** software. It was developed as part of the `Tutor Adoption Initiative`_ for the purpose learning about the Tutor Plugin API, and it has been tested to work for with Tutor and Open edX for local development, local deployment, and Kubernetes deployment. However, it has *not* yet been tested with a production Open edX instance. Although this plugin is nominally maintained by the Center for Reimagining Learning, we do not currently have plans to do any comprehensive production-tier testing. You have been warned!
 
-* The plugin has not yet been tested with a Tutor deployment in which ``ENABLE_HTTPS=true``.
-* As a secret, ``COURSEGRAPH_NEO4J_PASSWORD`` may need to be handled more carefully. It is currently dumped into CMS settings files in plaintext.
-* Under ``tutor k8s``, CourseGraph data is not persisted. It is stored in the Neo4j container and gets destroyed when the pod is stopped.
-
-If you're interested in contributing, feel free to open an issue or a pull request. We'll try to give it a first look within a week.
+If you choose to use this plugin, we're eager to hear about your experiences! Please let us know by opening an issue in this repository or posting on the Open edX or Tutor forums. Also, if you're interested in contributing, feel free to open an issue or a pull request. We'll try to give it a first look within a week.
 
 .. _Tutor Adoption Initiative: https://openedx.atlassian.net/wiki/spaces/COMM/pages/3315335223/Tutor+Adoption+Initiative
 
@@ -72,15 +68,15 @@ Installation
 
 Install the latest stable version (requires the latest `Tutor release`_)::
 
-  pip install git+https://github.com/kdmccormick/tutor-contrib-coursegraph
+  pip install tutor-contrib-coursegraph
 
 Or, install the latest nightly version (requires `Tutor Nightly`_)::
 
-  pip install git+https://github.com/kdmccormick/tutor-contrib-coursegraph@nightly
+  pip install git+https://github.com/openedx/tutor-contrib-coursegraph@nightly
 
 Or, install the plugin to be hacked on::
 
-  git clone git@github.com:kdmccormick/tutor-contrib-coursegraph
+  git clone git@github.com:openedx/tutor-contrib-coursegraph
   cd tutor-contrib-coursegraph
   source {{ PATH TO A VIRTUAL ENVIRONMENT }}
   make dev-requirements
