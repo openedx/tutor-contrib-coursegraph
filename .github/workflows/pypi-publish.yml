@@ -1,0 +1,12 @@
+# When a GitHub release is made, publish this package to PyPI.
+# https://github.com/openedx/.github/.github/workflows/pr-automerge-open-release.yml
+
+name: Push release to PyPI
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  pypi-publish:
+    uses: openedx/.github/.github/workflows/pypi-publish.yml@master
