@@ -24,8 +24,15 @@ spec:
           {% else %}
               value: 'none'
           {% endif %}
+          volumeMounts:
+            - mountPath: /data/
+              name: data
           ports:
             - containerPort: 7474  # HTTP
             - containerPort: 7687  # Bolt
           securityContext:
             allowPrivilegeEscalation: false
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: coursegraph
