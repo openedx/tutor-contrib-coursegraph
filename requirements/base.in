@@ -1,2 +1,2 @@
 click
-tutor
+tutor>=14,<15
