@@ -15,20 +15,20 @@ UPGRADE=CUSTOM_COMPILE_COMMAND='make upgrade' pip-compile --upgrade
 ###### Development
 
 upgrade: ## Upgrade requirements files
-	pip install -r requirements/piptools.txt
-	$(UPGRADE) requirements/piptools.in
-	pip install -r requirements/piptools.txt
+	pip install -r requirements/pip.txt
+	$(UPGRADE) --allow-unsafe requirements/pip.in
+	pip install -r requirements/pip.txt
 	$(UPGRADE) requirements/base.in
 	$(UPGRADE) requirements/dev.in
 
 requirements: ## Install packages from base requirement files
-	pip install -r requirements/piptools.txt
+	pip install -r requirements/pip.txt
 	pip install -r requirements/base.txt
 	pip uninstall --yes $(PROJECT)
 	pip install .
 
 dev-requirements: ## Install packages from developer requirement files
-	pip install -r requirements/piptools.txt
+	pip install -r requirements/pip.txt
 	pip install -r requirements/dev.txt
 	pip uninstall --yes $(PROJECT)
 	pip install -e .

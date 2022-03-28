@@ -1,5 +1,4 @@
 -r base.txt
--r piptools.txt
 
 black
 pyinstaller
