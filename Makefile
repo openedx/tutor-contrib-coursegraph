@@ -1,6 +1,7 @@
-.PHONY: dev-requirements format help release release-push release-tag \
-        release-unsafe requirements test test-format test-install test-lint \
-        test-pythonpackage test-types upgrade version
+.PHONY: build-pythonpackage dev-requirements format help push-pythonpackage \
+        release release-push release-tag release-unsafe requirements test \
+        test-format test-install test-k8s test-lint test-pythonpackage \
+        test-types upgrade version
 
 .DEFAULT_GOAL := help
 
@@ -32,6 +33,12 @@ dev-requirements: ## Install packages from developer requirement files
 	pip uninstall --yes $(PROJECT)
 	pip install -e .
 
+build-pythonpackage: ## Build Python packages ready to upload to pypi
+	python setup.py sdist bdist_wheel
+
+push-pythonpackage: ## Push python package to pypi
+	twine upload --skip-existing dist/$(PROJECT)-$(shell make version).tar.gz
+
 test: test-lint test-install test-types test-format test-pythonpackage ## Run all tests by decreasing order of priority
 
 test-format: ## Run code formatting tests
@@ -46,8 +53,7 @@ test-install: ## Run installation test script
 test-types: ## Check type definitions
 	mypy --ignore-missing-imports --strict ${SOURCES}
 
-test-pythonpackage: ## Test that package can be uploaded to pypi
-	python setup.py sdist
+test-pythonpackage: build-pythonpackage ## Test that package can be uploaded to pypi
 	twine check dist/$(PROJECT)-$(shell make version).tar.gz
 
 format: ## Format code automatically

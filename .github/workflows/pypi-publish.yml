@@ -1,12 +1,29 @@
-# When a GitHub release is made, publish this package to PyPI.
-# https://github.com/openedx/.github/.github/workflows/pr-automerge-open-release.yml
-
-name: Push release to PyPI
+name: Publish package to PyPI
 
 on:
   release:
     types: [published]
 
 jobs:
-  pypi-publish:
-    uses: openedx/.github/.github/workflows/pypi-publish.yml@master
+  push:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: setup python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+
+      - name: Install pip
+        run: pip install -r requirements/pip.txt
+
+      - name: Build package
+        run: make build-pythonpackage
+
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@master
+        with:
+          user: __token__
+          password: ${{ secrets.PYPI_UPLOAD_TOKEN }}
