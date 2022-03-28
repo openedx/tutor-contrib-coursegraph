@@ -34,7 +34,7 @@ dev-requirements: ## Install packages from developer requirement files
 	pip install -e .
 
 build-pythonpackage: ## Build Python packages ready to upload to pypi
-	python setup.py sdist
+	python setup.py sdist bdist_wheel
 
 push-pythonpackage: ## Push python package to pypi
 	twine upload --skip-existing dist/$(PROJECT)-$(shell make version).tar.gz
