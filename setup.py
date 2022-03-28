@@ -80,7 +80,7 @@ setup(
     install_requires=load_requirements("requirements/base.in"),
     entry_points={"tutor.plugin.v0": ["coursegraph = tutorcoursegraph.plugin"]},
     classifiers=[
-        "Development Status :: 4 - Production/Stable",
+        "Development Status :: 4 - Beta",
         "Environment :: Console",
         "Environment :: Web Environment",
         "Intended Audience :: Developers",
