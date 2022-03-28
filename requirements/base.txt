@@ -18,17 +18,17 @@ click==8.0.4
     # via
     #   -r requirements/base.in
     #   tutor
-google-auth==2.6.0
+google-auth==2.6.2
     # via kubernetes
 idna==3.3
     # via requests
-jinja2==3.0.3
+jinja2==3.1.1
     # via tutor
 kubernetes==23.3.0
     # via tutor
-markupsafe==2.1.0
+markupsafe==2.1.1
     # via jinja2
-mypy==0.931
+mypy==0.942
     # via tutor
 mypy-extensions==0.4.3
     # via mypy
@@ -63,11 +63,11 @@ six==1.16.0
     #   python-dateutil
 tomli==2.0.1
     # via mypy
-tutor==13.1.5
+tutor==13.1.8
     # via -r requirements/base.in
 typing-extensions==4.1.1
     # via mypy
-urllib3==1.26.8
+urllib3==1.26.9
     # via
     #   kubernetes
     #   requests
