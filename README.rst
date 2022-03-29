@@ -159,6 +159,26 @@ Operations
 
 Operating CourseGraph is fairly straightforward, especially if you treat CourseGraph data as a non-critical secondary view into the CMS's course data. That is: you should be willing to completely drop and re-generate the CourseGraph data stord in Neo4j. By doing so, you avoid needing to back up Neo4j, and you de-risk the Neo4j schema version upgrades that you'll need to perform over time with new Open edX releases.
 
+Managing Data
+*************
+
+By default, this plugin configures CMS to dump each course to CourseGraph whenever it is published, allowing you to "set and forget" the tool. You can disable this behavior by setting ``COURSEGRAPH_DUMP_COURSE_ON_PUBLISH`` to ``false``, regenerating your Tutor environment, and restarting CMS.
+
+If you have disabled automatic dumping, then you'll need to periodically refresh the data in CourseGraph manually. You can do so via the CMS administration console at, under the **COURSE GRAPH COURSE DUMPS** page in the **COURSE GRAPH** app:
+
+|coursegraph admin|
+|coursegraph admin success|
+
+Alternatively, you can skip the admin console by using a CMS management command::
+
+  tutor [dev|local|k8s] exec coursegraph ./manage.py cms dump_to_neo4j
+
+.. |coursegraph admin| image:: https://user-images.githubusercontent.com/3628148/153106921-0e8c404b-df88-4c15-afbe-26627873d43e.png
+   :alt: CourseGraph dump page in CMS admin console, demonstrating that individual courses can be selected for dump
+
+.. |coursegraph admin success| image:: https://user-images.githubusercontent.com/3628148/153107016-fc6354d8-1c61-4728-b0a4-59150a3bf7b2.png
+   :alt: CourseGraph dump page in CMS admin console, showing message after course dumps are successfully enqueued
+
 .. _Managing Users:
 
 Managing Users
@@ -182,26 +202,6 @@ Finally, initializing CourseGraph with ``COURSEGRAPH_NEO4J_PASSWORD`` set to ``!
 
 .. _Procedures for native user management: https://neo4j.com/docs/operations-manual/3.5/authentication-authorization/native-user-role-management/procedures/
 
-
-Managing Data
-*************
-
-By default, this plugin configures CMS to dump each course to CourseGraph whenever it is published, allowing you to "set and forget" the tool. You can disable this behavior by setting ``COURSEGRAPH_DUMP_COURSE_ON_PUBLISH`` to ``false``, regenerating your Tutor environment, and restarting CMS.
-
-If you have disabled automatic dumping, then you'll need to periodically refresh the data in CourseGraph manually. You can do so via the CMS administration console at, under the **COURSE GRAPH COURSE DUMPS** page in the **COURSE GRAPH** app:
-
-|coursegraph admin|
-|coursegraph admin success|
-
-Alternatively, you can skip the admin console by using a CMS management command::
-
-  tutor [dev|local|k8s] exec coursegraph ./manage.py cms dump_to_neo4j
-
-.. |coursegraph admin| image:: https://user-images.githubusercontent.com/3628148/153106921-0e8c404b-df88-4c15-afbe-26627873d43e.png
-   :alt: CourseGraph dump page in CMS admin console, demonstrating that individual courses can be selected for dump
-
-.. |coursegraph admin success| image:: https://user-images.githubusercontent.com/3628148/153107016-fc6354d8-1c61-4728-b0a4-59150a3bf7b2.png
-   :alt: CourseGraph dump page in CMS admin console, showing message after course dumps are successfully enqueued
 
 Configuration
 *************
