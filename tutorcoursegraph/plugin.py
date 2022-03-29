@@ -24,6 +24,7 @@ config = {
         "NEO4J_DOCKER_IMAGE": "{{ DOCKER_REGISTRY }}neo4j:{{ COURSEGRAPH_NEO4J_VERSION }}",
         "NEO4J_HOST": "coursegraph.{{ LMS_HOST }}",
         "DUMP_COURSE_ON_PUBLISH": True,
+        "RUN_NEO4J": True,
     },
 }
 

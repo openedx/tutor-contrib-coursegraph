@@ -179,6 +179,17 @@ Alternatively, you can skip the admin console by using a CMS management command:
 .. |coursegraph admin success| image:: https://user-images.githubusercontent.com/3628148/153107016-fc6354d8-1c61-4728-b0a4-59150a3bf7b2.png
    :alt: CourseGraph dump page in CMS admin console, showing message after course dumps are successfully enqueued
 
+
+Managing Ingress Access
+***********************
+
+By default, CourseGraph's Neo4j service is accessible to the outside world for HTTP and Bolt traffic via Caddy, the proxy provided by Tutor. Neo4j's bfasic authentication scheme (described in `Managing Users`_) may or may not be sufficient for your security needs. If it is *not* sufficient, then you have two options:
+
+1. Use your own Web proxy in place of Tutor's Caddy service by setting ``ENABLE_WEB_PROXY=false``. Via your Web proxy, restrict ingress CourseGraph access as desired. If you're not already using your own Web proxy, then this is probably *not* what you want to do, as it'd affect your entire Tutor deployment just for the sake of this plugin.
+2. Set ``COURSEGRAPH_RUN_NEO4J=false`` and self-manage a separate Neo4j service, whose ingress access you could control as desired. Then, configure this plugin to point at your self-managed Neo4j service so that CMS can dump to content to it. See the `Configuration`_ section for specifics. If you choose to go this route, the authors of this plugin recommend the `official Neo4j docker image`_ as a starting point for self-hosting Neo4j.
+
+.. _official Neo4j docker image: https://neo4j.com/developer/docker-run-neo4j/
+
 .. _Managing Users:
 
 Managing Users
@@ -191,7 +202,7 @@ This plugin currently ships with Neo4j 3.5 Community Edition, which provides som
 * ``CALL dbms.security.deleteUser(<username>)``
 * ``CALL dbms.security.listUsers()``
 
-Since authorization control is not availble in the Neo4j Community Edition, all users will have full administrative control over Neo4j data, including ability to to read all graphs, modify nodes, modify relationships, and create new users. Because of this, access to any set of CourseGraph Neo4j credentials confers read access to your entire course catalog, as well as the ability to insert fake data into CourseGraph. As such, if your CourseGraph instance is accessible by the public, then **all Neo4j credential sets should be treated as secrets**.
+Since authorization control is not availble in the Neo4j Community Edition, all users will have full administrative control over Neo4j data, including ability to to read all graphs, modify nodes, modify relationships, and create new users. Because of this, access to any set of CourseGraph Neo4j credentials confers read access to your entire course catalog, as well as the ability to insert fake data into CourseGraph. As such, if your CourseGraph instance is accessible by the public, then **all Neo4j credential sets should be treated as production secrets**.
 
 By default, this plugin initializes Neo4j with one user, whose username is ``neo4j`` and whose password is set from the ``COURSEGRAPH_NEO4J_PASSWORD`` Tutor setting. When CMS pushes data to Neo4j, it also authenticates with ``neo4j`` as its username and ``COURSEGRAPH_NEO4J_PASSWORD`` as its password. Keep in mind that:
 
@@ -202,6 +213,8 @@ Finally, initializing CourseGraph with ``COURSEGRAPH_NEO4J_PASSWORD`` set to ``!
 
 .. _Procedures for native user management: https://neo4j.com/docs/operations-manual/3.5/authentication-authorization/native-user-role-management/procedures/
 
+
+.. _Configuration:
 
 Configuration
 *************
@@ -235,6 +248,10 @@ The Tutor plugin can be configured with several settings. The names of all setti
      - bool
      - ``true``
      - Should CMS automatically dump a course to CourseGraph whenever it's published? If disabled, you will instead need to periodically dump courses via the management command or admin console.
+   * - ``RUN_NEO4J``
+     - bool
+     - ``true``
+     - Whether the Neo4j service should be started. Only disable if you wish to manage your own Neo4j instance outside of Tutor. If you disable this, then set ``COURSEGRAPH_NEO4J_HOST`` to the hostname of your self-managed instance, set ``COURSEGRAPH_NEO4J_PASSWORD`` to the password of your instance's ``neo4j`` user, and expose port 7687 for unencrypted Bolt traffic.
 
 
 Development

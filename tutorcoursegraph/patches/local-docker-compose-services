@@ -1,3 +1,4 @@
+{% if COURSEGRAPH_RUN_NEO4J %}
 coursegraph:
   image: "{{ COURSEGRAPH_NEO4J_DOCKER_IMAGE }}"
   environment:
@@ -9,3 +10,4 @@ coursegraph:
   restart: unless-stopped
   volumes:
     - ../../data/coursegraph:/data
+{% endif %}

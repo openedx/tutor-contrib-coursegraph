@@ -1,3 +1,4 @@
+{% if COURSEGRAPH_RUN_NEO4J %}
 
 # CourseGraph Web frontend.
 {{ COURSEGRAPH_NEO4J_HOST }}{$default_site_port} {
@@ -31,3 +32,5 @@ bolt.{{ COURSEGRAPH_NEO4J_HOST }}{$default_site_port} {
 
     import proxy "coursegraph:7687"
 }
+
+{% endif %}
