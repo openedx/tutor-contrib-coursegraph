@@ -1,2 +1,4 @@
+{% if COURSEGRAPH_RUN_NEO4J %}
 - {{ COURSEGRAPH_NEO4J_HOST }}
 - bolt.{{ COURSEGRAPH_NEO4J_HOST }}
+{% endif %}
