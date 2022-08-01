@@ -1,12 +1,7 @@
+-c constraints.txt
+
 # Core dependencies for installing other packages
 
-# pip>=22 is incompatible with latest pip tools, raises:
-#
-#    ...
-#         assert isinstance(handler, logging.StreamHandler)
-#    AssertionError
-pip<22
-
+pip
 setuptools
 wheel
-pip-tools
