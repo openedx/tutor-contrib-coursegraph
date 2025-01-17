@@ -5,7 +5,7 @@
 .DEFAULT_GOAL := help
 
 PACKAGE=tutorcoursegraph
-PROJECT=tutor-contrib-coursegraph
+PROJECT=tutor_contrib_coursegraph
 
 SOURCES=./setup.py ./$(PACKAGE)
 
