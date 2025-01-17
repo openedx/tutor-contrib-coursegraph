@@ -4,15 +4,12 @@ Implements CourseGraph plugin via Tutor Plugin API v0.
 Important exports: templates, config, hooks, patches, and __version__.
 """
 
-import os
-from glob import glob
 from typing import Dict
-
-import pkg_resources
+from importlib import resources
 
 from .__about__ import __version__
 
-templates = pkg_resources.resource_filename("tutorcoursegraph", "templates")
+TEMPLATES = str(resources.files("tutorcoursegraph").joinpath("templates"))
 
 config = {
     "add": {
@@ -39,10 +36,12 @@ def patches() -> Dict[str, str]:
     Load mapping from patch file names to their contents.
     """
     all_patches = {}
-    patches_dir = pkg_resources.resource_filename("tutorcoursegraph", "patches")
-    for path in glob(os.path.join(patches_dir, "*")):
-        with open(path, encoding="utf-8") as patch_file:
-            name = os.path.basename(path)
-            content = patch_file.read()
-            all_patches[name] = content
+    patches_dir = resources.files("tutorcoursegraph").joinpath("patches")
+
+    for path in patches_dir.iterdir():
+        if path.is_file():
+            with open(str(path), encoding="utf-8") as patch_file:
+                name = path.name
+                content = patch_file.read()
+                all_patches[name] = content
     return all_patches
