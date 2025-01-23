@@ -9,14 +9,18 @@ on:
 jobs:
   tests:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12"]
     steps:
 
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v2
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
         with:
-          python-version: 3.8
+          python-version: ${{ matrix.python-version }}
 
       - name: Upgrade pip
         run: python -m pip install --upgrade pip setuptools==44.0.0
@@ -37,7 +41,7 @@ jobs:
         run: make test-pythonpackage
 
       - name: Install caddy for Caddyfile syntax checking
-        run: |        
+        run: |
           sudo apt install -y debian-keyring debian-archive-keyring apt-transport-https
           curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | sudo gpg --dearmor -o /usr/share/keyrings/caddy-stable-archive-keyring.gpg
           curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' | sudo tee /etc/apt/sources.list.d/caddy-stable.list
