@@ -1,6 +1,6 @@
 🛑🛑🛑
 
-**This Repository is archived and no longer under active development.  Instead of coursegraph consider using `Aspects <https://docs.openedx.org/projects/openedx-aspects/en/latest/index.html>`_.**
+**This Repository is archived and no longer under active development.  Instead of coursegraph consider using** `Aspects <https://docs.openedx.org/projects/openedx-aspects/en/latest/index.html>`_.
 
 🛑🛑🛑
 
