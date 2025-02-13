@@ -1,3 +1,10 @@
+🛑🛑🛑
+
+**This Repository is archived and no longer under active development.  Instead of coursegraph consider using `Aspects <https://docs.openedx.org/projects/openedx-aspects/en/latest/index.html>`_.**
+
+🛑🛑🛑
+
+
 CourseGraph plugin for `Tutor`_
 ----------------------------------------------------------------
 
@@ -18,7 +25,7 @@ CourseGraph was initially an internal tool at edX, Inc., but as of the Maple rel
 .. _Cypher: https://neo4j.com/developer/cypher/
 
 .. |Neo4j| image:: https://dist.neo4j.com/wp-content/uploads/20210423072428/neo4j-logo-2020-1.svg
-   :width: 300
+   :width: 300🛑
    :align: middle
    :alt: Neo4j logo
 
